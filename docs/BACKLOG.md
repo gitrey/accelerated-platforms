@@ -14,4 +14,3 @@
 | T-0004 | F-0001 | Update documentation for Async and Batch Inference | SWE-2 | Completed |
 | T-0005 | F-0001 | Verify and Test the new inference patterns | SWE-Test | Completed |
 | T-0006 | F-0001 | Fix Offline Batch Inference resource patch (limit to 1 GPU) | TPM | Completed |
-
