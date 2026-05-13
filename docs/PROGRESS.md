@@ -18,12 +18,13 @@ Synchronized with PM branch, recovered spec, and broke down F-0001 into technica
     - Async Inference and Documentation passed.
     - **Offline Batch Inference FAILED**: Missing resource patch for 1 x H100 GPU (defaulted to 2).
 - Assigned task T-0006 to SWE-2 for remediation.
-- SWE-2 remediated T-0006:
-    - Created `patch-resources.yaml` to limit GPU to 1 for H100 Gemma 3 27b offline batch inference.
-    - Updated `kustomization.yaml` to include the patch.
+- SWE-2 remediated T-0006 initially with a patch, but kustomize failed because of name prefixing.
+- TPM manually applied final remediation for T-0006 due to persistent hub connectivity issues:
+    - Added `GPU_LIMIT=1` to `runtime.env`.
+    - Implemented `replacements` strategy in `kustomization.yaml` for GPU limits/requests to ensure robustness against name changes.
+    - Deleted broken `patch-resources.yaml`.
+- SWE-Test verified the fix and the overall implementation (F-0001).
 
 ### Next Steps
-- Monitor SWE-2 for the fix (T-0006).
-- Re-verify with SWE-Test.
 - Merge feature branch and report completion to PM.
 
