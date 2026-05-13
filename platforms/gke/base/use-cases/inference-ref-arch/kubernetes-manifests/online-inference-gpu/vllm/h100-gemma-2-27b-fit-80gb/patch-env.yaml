@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: replaced-by-kustomize
+spec:
+  template:
+    spec:
+      containers:
+        - name: inference-server
+          env:
+            - name: VLLM_ALLOW_LONG_MAX_MODEL_LEN
+              value: "1"
+            - name: VLLM_ATTENTION_BACKEND
+              value: "FLASHINFER"
