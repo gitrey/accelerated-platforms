@@ -1,3 +1,4 @@
-last_synced_at: "2026-05-13T14:57:17.314132679Z"
+last_synced_at: "2026-05-13T15:12:30.327463451Z"
 synced_agents:
     - swe-2-agent
+    - swe-test-agent

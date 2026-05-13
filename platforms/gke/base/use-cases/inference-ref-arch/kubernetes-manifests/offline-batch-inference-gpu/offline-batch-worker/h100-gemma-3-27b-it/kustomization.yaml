@@ -23,10 +23,17 @@ configMapGenerator:
 
 nameSuffix: -h100-gemma-3-27b-it
 
-patches:
-  - path: patch-resources.yaml
-
 replacements:
+  - source:
+      fieldPath: data.GPU_LIMIT
+      kind: ConfigMap
+      name: runtime
+    targets:
+      - fieldPaths:
+          - spec.replicatedJobs.[name=obi-job].template.spec.template.spec.initContainers.[name=inference-server].resources.limits.[nvidia.com/gpu]
+          - spec.replicatedJobs.[name=obi-job].template.spec.template.spec.initContainers.[name=inference-server].resources.requests.[nvidia.com/gpu]
+        select:
+          kind: JobSet
   - source:
       fieldPath: data.CONTAINER_IMAGE_URL
       kind: ConfigMap
