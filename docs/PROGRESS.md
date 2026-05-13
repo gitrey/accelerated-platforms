@@ -14,9 +14,13 @@ Synchronized with PM branch, recovered spec, and broke down F-0001 into technica
     - Created Offline Batch Inference manifests for H100 Gemma 3 27b.
     - Verified configuration scripts work with the new manifests.
     - Updated documentation for Async and Batch Inference to include Gemma 3 27b on H100.
-- Assigned task T-0005 to SWE-Test.
+- SWE-Test completed initial verification (T-0005):
+    - Async Inference and Documentation passed.
+    - **Offline Batch Inference FAILED**: Missing resource patch for 1 x H100 GPU (defaulted to 2).
+- Assigned task T-0006 to SWE-2 for remediation.
 
 ### Next Steps
-- Monitor SWE-Test progress.
+- Monitor SWE-2 for the fix (T-0006).
+- Re-verify with SWE-Test.
 - Merge feature branch and report completion to PM.
 
