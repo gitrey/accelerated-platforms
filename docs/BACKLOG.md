@@ -18,4 +18,4 @@
 | T-0006 | F-0001 | Fix Offline Batch Inference resource patch (limit to 1 GPU) | TPM | Completed |
 | T-0007 | F-0002 | Retrieve weather for top 5 US cities | PM-Agent | Completed |
 | T-0008 | F-0002 | Document results in PROGRESS_WEATHER.md | PM-Agent | Completed |
-| T-0009 | F-0003 | Create conceptual architectural design doc for the Beach House | SWE-1 | Pending |
+| T-0009 | F-0003 | Create conceptual architectural design doc for the Beach House | SWE-1 | In Progress |
