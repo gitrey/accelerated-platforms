@@ -15,3 +15,8 @@
 | T-0004 | F-0001 | Update documentation for Async and Batch Inference | SWE-2 | Completed |
 | T-0005 | F-0001 | Verify and Test the new inference patterns | SWE-Test | Completed |
 | T-0006 | F-0001 | Fix Offline Batch Inference resource patch (limit to 1 GPU) | TPM | Completed |
+
+| ID | Feature | Title | Assignee | Status |
+|----|---------|-------|----------|--------|
+| T-0007 | F-0002 | Retrieve weather for top 5 US cities | PM-Agent | Completed |
+| T-0008 | F-0002 | Document results in PROGRESS_WEATHER.md | PM-Agent | Completed |
