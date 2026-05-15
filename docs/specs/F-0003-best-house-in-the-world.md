@@ -15,9 +15,9 @@ The user has requested the design of the "best house in the world", specifically
 4. **Conceptual Blueprints:** Produce a high-level architectural layout and design aesthetic.
 
 ## Acceptance Criteria
-- [ ] Conceptual architectural design document produced (including layout and materials).
-- [ ] List of "Best in Class" smart features for beachfront living defined.
-- [ ] Sustainability and durability plan for coastal environment completed.
+- [x] Conceptual architectural design document produced (including layout and materials).
+- [x] List of "Best in Class" smart features for beachfront living defined.
+- [x] Sustainability and durability plan for coastal environment completed.
 
 ## Out of Scope
 - Literal physical construction (unless automated robots are available).
