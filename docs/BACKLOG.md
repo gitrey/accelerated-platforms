@@ -20,7 +20,7 @@
 | T-0007 | F-0002 | Retrieve weather for top 5 US cities | PM-Agent | Completed |
 | T-0008 | F-0002 | Document results in PROGRESS_WEATHER.md | PM-Agent | Completed |
 | T-0009 | F-0003 | Create conceptual architectural design doc for the Beach House | SWE-1 | Completed |
-| T-0010 | F-0004 | Create docs/platforms/cws/image-pipeline.md with architecture overview | DOC-Agent | Pending |
-| T-0011 | F-0004 | Document existing CWS image templates (Dockerfiles/Config) | DOC-Agent | Pending |
-| T-0012 | F-0004 | Create extension guide for custom CWS images | DOC-Agent | Pending |
-| T-0013 | F-0004 | Integrate new docs with reference-implementation.md | DOC-Agent | Pending |
+| T-0010 | F-0004 | Create docs/platforms/cws/image-pipeline.md with architecture overview | DOC-Agent | In Progress |
+| T-0011 | F-0004 | Document existing CWS image templates (Dockerfiles/Config) | DOC-Agent | In Progress |
+| T-0012 | F-0004 | Create extension guide for custom CWS images | DOC-Agent | In Progress |
+| T-0013 | F-0004 | Integrate new docs with reference-implementation.md | DOC-Agent | In Progress |
