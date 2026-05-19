@@ -7,6 +7,7 @@
 | F-0003 | P3 | Complete | The Best Beachfront House in the World | TBD | [F-0003](specs/F-0003-best-house-in-the-world.md) |
 | F-0004 | P1 | Complete | Detailed Documentation for CWS Image Pipeline (Milestone 7) | TBD | [F-0004](specs/F-0004-cws-image-pipeline-documentation.md) |
 | F-0005 | P2 | Complete | Agentic Development and Operations with Scion Reference Guide | TBD | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
+| F-0006 | P1 | Approved | Migration Framework: LangChain Agent to ADK 2.0 (Scion) | TBD | [F-0006](specs/F-0006-langchain-to-adk-migration.md) |
 
 ## Technical Tasks
 
@@ -28,3 +29,6 @@
 | T-0014 | F-0005 | Create initial outline for the Agentic Ops Reference Guide | DOC-Agent | Completed |
 | T-0015 | F-0005 | Draft content for "Agent Development Lifecycle" section | DOC-Agent | Completed |
 | T-0016 | F-0005 | Define operational monitoring and security patterns | TPM | Completed |
+| T-0017 | F-0006 | Produce LangChain to ADK 2.0 Mapping Table | PM-Agent | Completed |
+| T-0018 | F-0006 | Create tool extraction and YAML definition guide | SWE-1 | Pending |
+| T-0019 | F-0006 | Implement PoC migration for Search agent | SWE-2 | Pending |
