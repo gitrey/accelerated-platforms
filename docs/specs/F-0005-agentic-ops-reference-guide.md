@@ -1,7 +1,7 @@
 # F-0005: Agentic Development and Operations with Scion Reference Guide
 
 - **Type:** Feature
-- **Status:** Approved
+- **Status:** Complete
 - **Priority:** P2
 - **JIRA ID:** TBD
 
@@ -22,9 +22,9 @@ Users need a comprehensive reference guide to understand and implement agentic d
 5. **Reference Guide Outline:** Provide a structured outline for a larger documentation effort.
 
 ## Acceptance Criteria
-- [ ] Outline for the "Agentic Development and Operations with Scion Reference Guide" produced.
-- [ ] Draft content for "Agent Development Lifecycle" section completed.
-- [ ] Operational monitoring patterns defined.
+- [x] Outline for the "Agentic Development and Operations with Scion Reference Guide" produced (see docs/AGENTIC_OPS_GUIDE.md).
+- [x] Draft content for "Agent Development Lifecycle" section completed.
+- [x] Operational monitoring patterns defined (see docs/AGENTIC_OPS_PATTERNS.md).
 
 ## Out of Scope
 - Literal implementation of a new monitoring tool.

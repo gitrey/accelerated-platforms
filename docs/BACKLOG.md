@@ -6,7 +6,7 @@
 | F-0002 | P2 | Complete | Weather Monitoring in Top US Cities | TBD | [F-0002](specs/F-0002-weather-monitoring.md) |
 | F-0003 | P3 | Complete | The Best Beachfront House in the World | TBD | [F-0003](specs/F-0003-best-house-in-the-world.md) |
 | F-0004 | P1 | Complete | Detailed Documentation for CWS Image Pipeline (Milestone 7) | TBD | [F-0004](specs/F-0004-cws-image-pipeline-documentation.md) |
-| F-0005 | P2 | Approved | Agentic Development and Operations with Scion Reference Guide | TBD | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
+| F-0005 | P2 | Complete | Agentic Development and Operations with Scion Reference Guide | TBD | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
 
 ## Technical Tasks
 
