@@ -81,3 +81,18 @@ PM Agent added F-0004 (Detailed Documentation for CWS Image Pipeline). Tasks ass
 ### Next Steps
 - Continue to monitor backlog for new features or feedback.
 
+## Session: 2026-05-19 - Agentic Ops Guide Assignment
+
+### Summary
+PM Agent added F-0005 (Agentic Development and Operations with Scion Reference Guide). Tasks assigned to DOC-Agent and TPM.
+
+### Activities
+- Synced with `scion/pm-agent` branch.
+- Reviewed `docs/specs/F-0005-agentic-ops-reference-guide.md`.
+- Assigned tasks T-0014 and T-0015 to `doc-agent`.
+- TPM completed task T-0016: Defined operational monitoring and security patterns in `docs/AGENTIC_OPS_PATTERNS.md`.
+
+### Next Steps
+- Monitor DOC-Agent progress.
+- Merge F-0005 docs when complete.
+
