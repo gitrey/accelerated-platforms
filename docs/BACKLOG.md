@@ -25,6 +25,6 @@
 | T-0011 | F-0004 | Document existing CWS image templates (Dockerfiles/Config) | DOC-Agent | Completed |
 | T-0012 | F-0004 | Create extension guide for custom CWS images | DOC-Agent | Completed |
 | T-0013 | F-0004 | Integrate new docs with reference-implementation.md | DOC-Agent | Completed |
-| T-0014 | F-0005 | Create initial outline for the Agentic Ops Reference Guide | DOC-Agent | In Progress |
-| T-0015 | F-0005 | Draft content for "Agent Development Lifecycle" section | DOC-Agent | In Progress |
+| T-0014 | F-0005 | Create initial outline for the Agentic Ops Reference Guide | DOC-Agent | Completed |
+| T-0015 | F-0005 | Draft content for "Agent Development Lifecycle" section | DOC-Agent | Completed |
 | T-0016 | F-0005 | Define operational monitoring and security patterns | TPM | Completed |
