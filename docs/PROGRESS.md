@@ -91,8 +91,10 @@ PM Agent added F-0005 (Agentic Development and Operations with Scion Reference G
 - Reviewed `docs/specs/F-0005-agentic-ops-reference-guide.md`.
 - Assigned tasks T-0014 and T-0015 to `doc-agent`.
 - TPM completed task T-0016: Defined operational monitoring and security patterns in `docs/AGENTIC_OPS_PATTERNS.md`.
+- `doc-agent-2` completed the Agentic Ops Reference Guide outline and initial draft.
+- New guide created at `docs/AGENTIC_OPS_GUIDE.md`.
+- Verified and merged F-0005 into the main project.
 
 ### Next Steps
-- Monitor DOC-Agent progress.
-- Merge F-0005 docs when complete.
+- Continue to monitor backlog for new features or feedback.
 
