@@ -16,8 +16,13 @@ Currently, several legacy agents are built using the LangChain framework. To lev
 5. **Orchestration Update:** Replace LangChain's internal orchestration with Scion agent-to-agent messaging.
 
 ## Acceptance Criteria
+<<<<<<< HEAD
 - [ ] Comprehensive Migration Guide produced.
 - [ ] Mapping table (LangChain vs. ADK 2.0) completed.
+=======
+- [x] Comprehensive Migration Guide produced (see [docs/LANGCHAIN_TOOL_MIGRATION.md](../LANGCHAIN_TOOL_MIGRATION.md)).
+- [x] Mapping table (LangChain vs. ADK 2.0) completed (see [docs/LANGCHAIN_MIGRATION_PLAN.md](../LANGCHAIN_MIGRATION_PLAN.md)).
+>>>>>>> feature/langchain-tool-migration-guide-v2
 - [ ] Proof-of-concept (PoC) migration of a standard "Search & Calculate" agent.
 
 ## Out of Scope

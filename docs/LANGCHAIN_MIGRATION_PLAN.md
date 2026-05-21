@@ -15,6 +15,11 @@ The goal is to identify all LangChain components and map them to their ADK 2.0 e
 | **Prompts / Templates** | **System Instructions (prompt.md)** | Core persona and behavioral logic. |
 
 ## Phase 2: Tool & Skill Development
+<<<<<<< HEAD
+=======
+For a detailed guide on extracting and defining tools, see [docs/LANGCHAIN_TOOL_MIGRATION.md](LANGCHAIN_TOOL_MIGRATION.md).
+
+>>>>>>> feature/langchain-tool-migration-guide-v2
 1. **Extract Logic:** Isolate the core execution logic from the LangChain tool definitions.
 2. **Containerize:** Package each tool into its own container-ready environment (typically part of the agent's `/workspace`).
 3. **YAML Definition:** Define the tool interface (inputs, outputs, description) in a YAML file for the Scion registry.

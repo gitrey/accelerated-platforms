@@ -31,8 +31,8 @@
 | T-0015 | F-0005 | Draft content for "Agent Development Lifecycle" section | DOC-Agent | Completed |
 | T-0016 | F-0005 | Define operational monitoring and security patterns | TPM | Completed |
 | T-0017 | F-0006 | Produce LangChain to ADK 2.0 Mapping Table | PM-Agent | Completed |
-| T-0018 | F-0006 | Create tool extraction and YAML definition guide | SWE-1 | In Progress |
+| T-0018 | F-0006 | Create tool extraction and YAML definition guide | SWE-1 | Completed |
 | T-0019 | F-0006 | Implement PoC migration for Search agent | SWE-2 | In Progress |
-| T-0020 | F-0007 | Create industrial design concepts for dog toothbrush | SWE-1 | Pending |
-| T-0021 | F-0007 | Define hardware specs for ultrasonic motor and battery | SWE-2 | Pending |
-| T-0022 | F-0007 | Draft initial schema for the companion mobile app | SWE-1 | Pending |
+| T-0020 | F-0007 | Create industrial design concepts for dog toothbrush | SWE-1 | Completed |
+| T-0021 | F-0007 | Define hardware specs for ultrasonic motor and battery | SWE-2 | In Progress |
+| T-0022 | F-0007 | Draft initial schema for the companion mobile app | SWE-1 | Completed |
