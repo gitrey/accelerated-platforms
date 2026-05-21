@@ -31,4 +31,4 @@
 | T-0016 | F-0005 | Define operational monitoring and security patterns | TPM | Completed |
 | T-0017 | F-0006 | Produce LangChain to ADK 2.0 Mapping Table | PM-Agent | Completed |
 | T-0018 | F-0006 | Create tool extraction and YAML definition guide | SWE-1 | In Progress |
-| T-0019 | F-0006 | Implement PoC migration for Search agent | SWE-2 | In Progress |
+| T-0019 | F-0006 | Implement PoC migration for Search agent | SWE-2 | Completed |

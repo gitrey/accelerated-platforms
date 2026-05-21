@@ -1,0 +1,12 @@
+name: google_search
+description: "A tool that searches the internet to find information. Useful for answering questions about current events or finding facts."
+inputs:
+  query:
+    type: string
+    description: "The search query."
+outputs:
+  result:
+    type: string
+    description: "The search results."
+execution:
+  command: ["python3", "google_search.py", "{{query}}"]

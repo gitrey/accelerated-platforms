@@ -1,0 +1,5 @@
+name: search_calculate_skill
+description: "A skill that provides search and calculation capabilities."
+tools:
+  - path: tools/google_search.yaml
+  - path: tools/calculator.yaml

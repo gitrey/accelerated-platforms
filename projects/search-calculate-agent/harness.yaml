@@ -1,0 +1,9 @@
+harness:
+  type: gemini
+  model: gemini-1.5-pro
+  parameters:
+    temperature: 0.0
+    max_output_tokens: 1024
+  auth:
+    method: api-key
+    secret_name: GOOGLE_API_KEY

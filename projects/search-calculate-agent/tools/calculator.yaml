@@ -1,0 +1,12 @@
+name: calculator
+description: "A tool that performs mathematical calculations. Useful for answering math-related questions."
+inputs:
+  expression:
+    type: string
+    description: "The mathematical expression to evaluate (e.g., '2 + 2', 'sqrt(16)')."
+outputs:
+  result:
+    type: string
+    description: "The result of the calculation."
+execution:
+  command: ["python3", "calculator.py", "{{expression}}"]
