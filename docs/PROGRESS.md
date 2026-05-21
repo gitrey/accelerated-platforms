@@ -98,3 +98,17 @@ PM Agent added F-0005 (Agentic Development and Operations with Scion Reference G
 ### Next Steps
 - Continue to monitor backlog for new features or feedback.
 
+## Session: 2026-05-21 - LangChain Migration Framework Assignment
+
+### Summary
+PM Agent added F-0006 (Migration Framework: LangChain Agent to ADK 2.0). Tasks assigned to SWE-1 and SWE-2.
+
+### Activities
+- Synced with `scion/pm-agent` branch.
+- Reviewed `docs/specs/F-0006-langchain-to-adk-migration.md` and `docs/LANGCHAIN_MIGRATION_PLAN.md`.
+- Assigned task T-0018 to SWE-1 for tool extraction guide.
+- Assigned task T-0019 to SWE-2 for PoC migration.
+
+### Next Steps
+- Monitor SWE progress on migration tasks.
+
