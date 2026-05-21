@@ -38,4 +38,4 @@
 | T-0022 | F-0007 | Draft initial schema for the companion mobile app | SWE-1 | Completed |
 | T-0023 | F-0007 | Perform BOM sourcing research and cost estimation | TPM | Pending |
 | T-0024 | F-0007 | Shortlist contract manufacturing partners for waterproof electronics | TPM | Pending |
-| T-0025 | F-0007 | Define DFM requirements for silicone overmolding | SWE-2 | Pending |
+| T-0025 | F-0007 | Define DFM requirements for silicone overmolding | SWE-2 | Completed |
