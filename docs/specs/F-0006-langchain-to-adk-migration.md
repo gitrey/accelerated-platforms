@@ -1,7 +1,7 @@
 # F-0006: Migration Framework: LangChain Agent to ADK 2.0 (Scion)
 
 - **Type:** Enhancement
-- **Status:** Approved
+- **Status:** Complete
 - **Priority:** P1
 - **JIRA ID:** TBD
 

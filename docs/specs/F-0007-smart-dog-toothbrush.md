@@ -1,7 +1,7 @@
 # F-0007: Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro)
 
 - **Type:** Feature
-- **Status:** Draft
+- **Status:** Complete
 - **Priority:** P2
 - **JIRA ID:** TBD
 
@@ -35,9 +35,9 @@ Maintaining dental hygiene in dogs is challenging. Manual brushing is often stre
 
 ## Acceptance Criteria
 - [x] Industrial design concept for the handle and interchangeable heads completed.
-- [x] Prototype for the ultrasonic motor and battery housing defined.
+- [x] Prototype for the ultrasonic motor and battery housing defined (see docs/F-0007-HARDWARE_SPECS.md).
 - [x] Initial schema for the companion tracking app developed.
-- [ ] Manufacturing partner shortlist and preliminary BOM cost estimate completed.
+- [x] Manufacturing partner shortlist and preliminary BOM cost estimate completed.
 
 ## Out of Scope
 - Marketing and distribution strategy.
