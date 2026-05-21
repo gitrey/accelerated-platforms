@@ -17,7 +17,7 @@ Maintaining dental hygiene in dogs is challenging. Manual brushing is often stre
 
 ## Acceptance Criteria
 - [ ] Industrial design concept for the handle and interchangeable heads completed.
-- [ ] Prototype for the ultrasonic motor and battery housing defined.
+- [x] Prototype for the ultrasonic motor and battery housing defined in [DOG_TOOTHBRUSH_HARDWARE.md](../DOG_TOOTHBRUSH_HARDWARE.md).
 - [ ] Initial schema for the companion tracking app developed.
 
 ## Out of Scope

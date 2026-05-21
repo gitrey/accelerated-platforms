@@ -8,7 +8,7 @@
 | F-0004 | P1 | Complete | Detailed Documentation for CWS Image Pipeline (Milestone 7) | TBD | [F-0004](specs/F-0004-cws-image-pipeline-documentation.md) |
 | F-0005 | P2 | Complete | Agentic Development and Operations with Scion Reference Guide | TBD | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
 | F-0006 | P1 | In Progress | Migration Framework: LangChain Agent to ADK 2.0 (Scion) | TBD | [F-0006](specs/F-0006-langchain-to-adk-migration.md) |
-| F-0007 | P2 | Approved | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | TBD | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
+| F-0007 | P2 | In Progress | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | TBD | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
 
 ## Technical Tasks
 
@@ -34,5 +34,5 @@
 | T-0018 | F-0006 | Create tool extraction and YAML definition guide | SWE-1 | In Progress |
 | T-0019 | F-0006 | Implement PoC migration for Search agent | SWE-2 | In Progress |
 | T-0020 | F-0007 | Create industrial design concepts for dog toothbrush | SWE-1 | Pending |
-| T-0021 | F-0007 | Define hardware specs for ultrasonic motor and battery | SWE-2 | Pending |
+| T-0021 | F-0007 | Define hardware specs for ultrasonic motor and battery | SWE-2 | In Review |
 | T-0022 | F-0007 | Draft initial schema for the companion mobile app | SWE-1 | Pending |
