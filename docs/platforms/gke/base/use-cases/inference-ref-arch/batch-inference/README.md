@@ -14,6 +14,10 @@ This example is built on top of the
 
 - Get access to the model.
 
+  - For Gemma 3:
+    - Accept the terms of the license on the Hugging Face model page.
+      - [**google/gemma-3-27b-it**](https://huggingface.co/google/gemma-3-27b-it)
+
   - For Llama:
     - Accept the terms of the license on the Hugging Face model page.
       - [**meta-llama/Llama-3.3-70B-Instruct**](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct)
@@ -39,6 +43,12 @@ This example is built on top of the
 ## Download the model to Cloud Storage
 
 - Choose the model.
+
+  - **Gemma-3-27B-Instruct**:
+
+    ```shell
+    export HF_MODEL_ID="google/gemma-3-27b-it"
+    ```
 
   - **Llama-3.3-70B-Instruct**:
 
@@ -195,6 +205,7 @@ This example is built on top of the
 
     | Model                  | l4  | h100 | h200 | RTX Pro 6000 |
     | ---------------------- | --- | ---- | ---- | ------------ |
+    | gemma-3-27b-it         | ❌  | ✅   | ❌   | ❌           |
     | llama-3.3-70b-instruct | ❌  | ✅   | ✅   | ✅           |
 
     - **NVIDIA H100 80GB**:

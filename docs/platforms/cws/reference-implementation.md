@@ -112,6 +112,8 @@ The following tools are required:
 
 ### Image Pipeline
 
+For a detailed overview of how the Image Pipeline works, its architecture, and available image templates, see the [Cloud Workstations Image Pipeline](./image-pipeline.md) guide.
+
 - Create the Git token file
 
   ```shell
