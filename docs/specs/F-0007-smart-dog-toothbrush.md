@@ -16,9 +16,9 @@ Maintaining dental hygiene in dogs is challenging. Manual brushing is often stre
 5. **Durability & Safety:** Made from medical-grade, chew-resistant, non-toxic silicone.
 
 ## Acceptance Criteria
-- [ ] Industrial design concept for the handle and interchangeable heads completed.
+- [x] Industrial design concept for the handle and interchangeable heads completed.
 - [ ] Prototype for the ultrasonic motor and battery housing defined.
-- [ ] Initial schema for the companion tracking app developed.
+- [x] Initial schema for the companion tracking app developed.
 
 ## Out of Scope
 - Marketing and distribution strategy.
