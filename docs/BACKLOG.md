@@ -42,5 +42,5 @@
 | T-0025 | F-0007 | Define DFM requirements for silicone overmolding | SWE-2 | Completed |
 | T-0026 | F-0008 | Define Google I/O Tracker Agent persona and instructions | PM-Agent | Completed |
 | T-0027 | F-0008 | Implement web-monitoring and summarization tools | SWE-1 | Pending |
-| T-0028 | F-0008 | Set up persistent local storage for announcements | SWE-2 | Pending |
+| T-0028 | F-0008 | Set up persistent local storage for announcements | SWE-2 | Completed |
 | T-0029 | F-0008 | Configure notification logic and broadcast settings | TPM | Pending |
