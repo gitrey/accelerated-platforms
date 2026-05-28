@@ -9,7 +9,7 @@
 | F-0005 | P2 | Complete | Agentic Development and Operations with Scion Reference Guide | TBD | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
 | F-0006 | P1 | Complete | Migration Framework: LangChain Agent to ADK 2.0 (Scion) | TBD | [F-0006](specs/F-0006-langchain-to-adk-migration.md) |
 | F-0007 | P2 | Complete | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | TBD | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
-| F-0008 | P2 | Approved | Google I/O Tracker Agent (ADK 2.0) | TBD | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
+| F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | TBD | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
 
 ## Technical Tasks
 
@@ -41,6 +41,6 @@
 | T-0024 | F-0007 | Shortlist contract manufacturing partners for waterproof electronics | TPM | Completed |
 | T-0025 | F-0007 | Define DFM requirements for silicone overmolding | SWE-2 | Completed |
 | T-0026 | F-0008 | Define Google I/O Tracker Agent persona and instructions | PM-Agent | Completed |
-| T-0027 | F-0008 | Implement web-monitoring and summarization tools | SWE-1 | In Progress |
-| T-0028 | F-0008 | Set up persistent local storage for announcements | SWE-2 | In Progress |
+| T-0027 | F-0008 | Implement web-monitoring and summarization tools | SWE-1 | Completed |
+| T-0028 | F-0008 | Set up persistent local storage for announcements | SWE-2 | Completed |
 | T-0029 | F-0008 | Configure notification logic and broadcast settings | TPM | Completed |
