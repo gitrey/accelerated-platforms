@@ -11,6 +11,7 @@
 | F-0007 | P2 | Complete | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | TBD | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
 | F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | TBD | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
 
+
 ## Technical Tasks
 
 | ID | Feature | Title | Assignee | Status |
