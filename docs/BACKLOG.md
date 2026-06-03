@@ -10,7 +10,7 @@
 | F-0006 | P1 | Complete | Migration Framework: LangChain Agent to ADK 2.0 (Scion) | TBD | [F-0006](specs/F-0006-langchain-to-adk-migration.md) |
 | F-0007 | P2 | Complete | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | TBD | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
 | F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | TBD | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
-| F-0009 | P1 | In Review | Veo Gen Media Demo App | TBD | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
+| F-0009 | P1 | Complete | Veo Gen Media Demo App | TBD | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
 
 
 ## Technical Tasks
@@ -49,4 +49,4 @@
 | T-0030 | F-0009 | Design and implement React frontend for Veo Demo App | SWE-1 | Completed |
 | T-0031 | F-0009 | Update workflow-api to support Veo generation endpoints | SWE-2 | Completed |
 | T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Completed |
-| T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | In Progress |
+| T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | Completed |
