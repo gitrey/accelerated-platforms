@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workflow-api
+  namespace: veo-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workflow-api
+  template:
+    metadata:
+      labels:
+        app: workflow-api
+    spec:
+      serviceAccountName: workflow-api-sa
+      containers:
+      - name: workflow-api
+        image: gcr.io/${PROJECT_ID}/workflow-api:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: COMFYUI_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: veo-demo-config
+              key: COMFYUI_BASE_URL
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: veo-demo-config
+              key: GOOGLE_CLIENT_ID
+        - name: ALLOWED_AUTH_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: veo-demo-config
+              key: ALLOWED_AUTH_DOMAIN
+        - name: GIN_MODE
+          value: "release"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: workflow-api
+  namespace: veo-demo
+spec:
+  selector:
+    app: workflow-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: ClusterIP

@@ -47,5 +47,5 @@
 | T-0029 | F-0008 | Configure notification logic and broadcast settings | TPM | Completed |
 | T-0030 | F-0009 | Design and implement React frontend for Veo Demo App | SWE-1 | Pending |
 | T-0031 | F-0009 | Update workflow-api to support Veo generation endpoints | SWE-2 | Pending |
-| T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Pending |
+| T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Completed |
 | T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | Pending |

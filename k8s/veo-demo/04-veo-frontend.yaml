@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veo-frontend
+  namespace: veo-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: veo-frontend
+  template:
+    metadata:
+      labels:
+        app: veo-frontend
+    spec:
+      containers:
+      - name: veo-frontend
+        image: gcr.io/${PROJECT_ID}/veo-frontend:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: veo-frontend
+  namespace: veo-demo
+spec:
+  selector:
+    app: veo-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP

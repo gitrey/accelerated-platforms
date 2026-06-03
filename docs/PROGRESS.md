@@ -147,3 +147,23 @@ PM Agent added F-0008 (Google I/O Tracker Agent). Tasks assigned to SWE-1, SWE-2
 ### Next Steps
 - Continue to monitor backlog for new features or feedback.
 
+
+## Session: 2026-06-03 - Veo Gen Media Demo App Infrastructure
+
+### Summary
+Completed containerization and Kubernetes manifests for F-0009 (Veo Gen Media Demo App). Provisioned Terraform resources and created deployment scripts.
+
+### Activities
+- Created Dockerfile and basic project structure for `veo-frontend` (React).
+- Verified and updated `workflow-api` (Go) Dockerfile.
+- Created comprehensive GKE manifests in `k8s/veo-demo/` including:
+    - Namespace, ConfigMap, and ServiceAccount (with Workload Identity).
+    - Deployments and Services for both frontend and backend.
+    - GCE Ingress for path-based routing.
+- Provisioned Terraform resources in `terraform/features/veo-demo/` for GCS media bucket and Artifact Registry.
+- Created `test/scripts/deploy-veo-demo.sh` for automated building and deployment.
+- Updated `docs/BACKLOG.md` marking T-0032 as Completed.
+
+### Next Steps
+- Coordinate with SWE-1 and SWE-2 for frontend and backend implementation.
+- Support deployment and testing of the full application.
