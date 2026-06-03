@@ -46,6 +46,7 @@
 | T-0028 | F-0008 | Set up persistent local storage for announcements | SWE-2 | Completed |
 | T-0029 | F-0008 | Configure notification logic and broadcast settings | TPM | Completed |
 | T-0030 | F-0009 | Design and implement React frontend for Veo Demo App | SWE-1 | In Progress |
-| T-0031 | F-0009 | Update workflow-api to support Veo generation endpoints | SWE-2 | In Review |
+| T-0031 | F-0009 | Update workflow-api to support Veo generation endpoints | SWE-2 | Completed |
 | T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Completed |
+
 | T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | In Progress |
