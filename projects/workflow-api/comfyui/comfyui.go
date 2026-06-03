@@ -47,6 +47,10 @@ func NewClient(baseURL string, clientID ...string) (*Client, error) {
 		return nil, fmt.Errorf("invalid base URL: %w", err)
 	}
 
+	if httpURL.Scheme != "http" && httpURL.Scheme != "https" {
+		return nil, fmt.Errorf("invalid URL scheme: %s, must be http or https", httpURL.Scheme)
+	}
+
 	wsScheme := "ws"
 	if httpURL.Scheme == "https" {
 		wsScheme = "wss"
