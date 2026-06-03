@@ -23,6 +23,7 @@ import (
 	"strings" // Make sure strings is imported
 
 	"comfyui-api-service/comfyui" // Import your local comfyui package
+	"comfyui-api-service/internal/config"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -31,12 +32,14 @@ import (
 // APIHandler holds dependencies like the ComfyUI client.
 type APIHandler struct {
 	ComfyClient *comfyui.Client
+	Cfg         *config.Config
 }
 
 // NewAPIHandler creates a new handler instance.
-func NewAPIHandler(client *comfyui.Client) *APIHandler {
+func NewAPIHandler(client *comfyui.Client, cfg *config.Config) *APIHandler {
 	return &APIHandler{
 		ComfyClient: client,
+		Cfg:         cfg,
 	}
 }
 
