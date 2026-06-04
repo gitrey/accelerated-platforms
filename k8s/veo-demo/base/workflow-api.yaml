@@ -16,7 +16,7 @@ spec:
       serviceAccountName: workflow-api-sa
       containers:
       - name: workflow-api
-        image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/workflow-api:latest
+        image: workflow-api:latest
         ports:
         - containerPort: 8080
         env:

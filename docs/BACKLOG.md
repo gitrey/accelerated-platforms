@@ -52,7 +52,7 @@
 | T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Completed |
 | T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | Completed |
 | T-0034 | F-0010 | Create Cloud Build triggers for frontend and backend | DevOps | Completed |
-| T-0035 | F-0010 | Refactor GKE manifests to use Kustomize/Env Handling | DevOps | Completed |
+| T-0035 | F-0010 | Refactor GKE manifests to use Kustomize/Env Handling | SWE-2 | Completed |
 | T-0036 | F-0010 | Implement automated deployment CD pipeline | DevOps | Completed |
 | T-0037 | F-0010 | Implement health check and smoke test script | SWE-1 | Completed |
 | T-0038 | F-0010 | Configure IAP and Ingress automation via Terraform | TPM | In Progress |
