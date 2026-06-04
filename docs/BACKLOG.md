@@ -51,4 +51,4 @@
 | T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Completed |
 
 | T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | In Progress |
-| T-0037 | F-0010 | Implement health check and smoke test script | SWE-1 | In Progress |
+| T-0037 | F-0010 | Implement health check and smoke test script | SWE-1 | Completed |
