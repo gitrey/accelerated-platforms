@@ -71,3 +71,62 @@ func TestBuildVeo3TextToVideoWorkflow(t *testing.T) {
 	assert.Equal(t, "VEO_3_1", inputs["model"])
 	assert.Equal(t, "gs://test-bucket/outputs/veo3", inputs["output_gcs_uri"])
 }
+
+func TestBuildVeo2ImageToVideoWorkflow(t *testing.T) {
+	h := &APIHandler{
+		Cfg: &config.Config{VeoAssetsBucket: "test-bucket"},
+	}
+
+	req := VeoImageToVideoRequest{
+		VeoGenerationRequest: VeoGenerationRequest{
+			Prompt: "i2v test",
+			Seed:   11111,
+		},
+		ImageGcsURI: "gs://test-bucket/input.jpg",
+	}
+
+	workflow := h.buildVeo2ImageToVideoWorkflow(req)
+
+	assert.NotNil(t, workflow)
+	assert.Contains(t, workflow, "5")
+	node5 := workflow["5"].(map[string]interface{})
+	assert.Equal(t, "Veo2GcsUriImageToVideoNode", node5["class_type"])
+
+	inputs := node5["inputs"].(map[string]interface{})
+	assert.Equal(t, "i2v test", inputs["prompt"])
+	assert.Equal(t, "gs://test-bucket/input.jpg", inputs["gcsuri"])
+	assert.Equal(t, "gs://test-bucket/outputs/veo2", inputs["output_gcs_uri"])
+}
+
+func TestBuildVeo3ImageToVideoWorkflow(t *testing.T) {
+	h := &APIHandler{
+		Cfg: &config.Config{VeoAssetsBucket: "test-bucket"},
+	}
+
+	req := Veo3ImageToVideoRequest{
+		Veo3GenerationRequest: Veo3GenerationRequest{
+			VeoGenerationRequest: VeoGenerationRequest{
+				Prompt: "veo3 i2v test",
+				Seed:   22222,
+			},
+			Model: "VEO_3_1",
+		},
+		ImageGcsURI: "gs://test-bucket/input.png",
+	}
+
+	workflow := h.buildVeo3ImageToVideoWorkflow(req)
+
+	assert.NotNil(t, workflow)
+	assert.Contains(t, workflow, "3")
+	node3 := workflow["3"].(map[string]interface{})
+	assert.Equal(t, "Veo3GcsUriImageToVideoNode", node3["class_type"])
+
+	inputs := node3["inputs"].(map[string]interface{})
+	assert.Equal(t, "veo3 i2v test", inputs["prompt"])
+	assert.Equal(t, "VEO_3_1", inputs["model"])
+	assert.Equal(t, "gs://test-bucket/input.png", inputs["gcsuri"])
+	assert.Equal(t, "gs://test-bucket/outputs/veo3", inputs["output_gcs_uri"])
+}
+
+
+
