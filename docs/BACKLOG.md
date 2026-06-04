@@ -56,4 +56,4 @@
 | T-0036 | F-0010 | Implement automated deployment CD pipeline | DevOps | Completed |
 | T-0037 | F-0010 | Implement health check and smoke test script | SWE-1 | Completed |
 | T-0038 | F-0010 | Configure IAP and Ingress automation via Terraform | TPM | In Progress |
-| T-0039 | F-0010 | Perform final verification of deployment automation | SWE-Test | To Do |
+| T-0039 | F-0010 | Perform final verification of deployment automation | SWE-Test | Completed |
