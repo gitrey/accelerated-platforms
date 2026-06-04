@@ -37,10 +37,57 @@ gcloud builds submit projects/veo-demo-app/frontend \
 # 2. Apply Kubernetes Manifests
 echo "Applying Kubernetes manifests..."
 
-for f in k8s/veo-demo/*.yaml; do
-    # Using envsubst to replace ${PROJECT_ID}, ${REGION}, and ${AR_REPO}
-    envsubst < "$f" | kubectl apply -f -
-done
+cd k8s/veo-demo/overlays/dev
+
+# Update project-specific values and images via a temporary Kustomize patch
+cat <<EOF > patch-project.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: veo-demo-config
+  namespace: veo-demo
+data:
+  VEO_ASSETS_BUCKET: "${PROJECT_ID}-veo-media"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: workflow-api-sa
+  namespace: veo-demo
+  annotations:
+    iam.gke.io/gcp-service-account: workflow-api-sa@${PROJECT_ID}.iam.gserviceaccount.com
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workflow-api
+  namespace: veo-demo
+spec:
+  template:
+    spec:
+      containers:
+      - name: workflow-api
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/workflow-api:latest"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veo-frontend
+  namespace: veo-demo
+spec:
+  template:
+    spec:
+      containers:
+      - name: veo-frontend
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/veo-frontend:latest"
+EOF
+
+# Build and Apply
+kubectl apply -k .
+
+# Cleanup temporary patch
+rm patch-project.yaml
+cd -
 
 echo "Deployment complete."
 echo "Access the app via the Ingress IP (this may take a few minutes to provision)."

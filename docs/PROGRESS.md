@@ -171,3 +171,18 @@ Completed containerization and Kubernetes manifests for F-0009 (Veo Gen Media De
 - Coordinated with `po-agent` regarding missing JIRA tools; provided the standard Scion JIRA tool names (via Atlassian MCP).
 - `po-agent` is currently on standby per user request regarding JIRA synchronization.
 - Continue to monitor backlog for new features or feedback.
+
+## Session: 2026-06-04 - Veo Demo App Kustomize Refactor
+
+### Summary
+Refactored the GKE manifests for the Veo Gen Media Demo App (F-0010) to use Kustomize, allowing for environment-specific configurations and improved automation.
+
+### Activities
+- Created Kustomize `base` directory and moved static manifests.
+- Implemented `dev` overlay for environment-specific overrides.
+- Updated `test/scripts/deploy-veo-demo.sh` to use `kubectl apply -k` and dynamic patches for project-specific values (PROJECT_ID, REGION).
+- Cleaned up manifests and updated documentation in `k8s/veo-demo/README.md`.
+- Updated `docs/BACKLOG.md` marking T-0037 as Completed.
+
+### Next Steps
+- Standby for further F-0010 tasks or other assignments.

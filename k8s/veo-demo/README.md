@@ -8,22 +8,28 @@ This directory contains the Kubernetes manifests for the Veo Gen Media Demo App.
 - **veo-frontend**: React-based frontend for the demo.
 - **ingress**: GCE Ingress for routing traffic.
 
+## Structure
+
+- **base/**: Contains the core Kubernetes manifests with placeholder values.
+- **overlays/dev/**: Contains development-specific overrides and patches.
+
 ## Deployment
 
-To deploy the application, you can use the provided script:
+To deploy the application, you can use the provided script which uses Kustomize:
 
 ```bash
 ./test/scripts/deploy-veo-demo.sh
 ```
 
-Ensure you have the following environment variables set if you want to override defaults:
+Alternatively, you can manually build and apply using Kustomize:
 
-- `PROJECT_ID`: Your GCP Project ID (auto-detected if not set).
-- `REGION`: Target region (default: us-central1).
+```bash
+kubectl apply -k k8s/veo-demo/overlays/dev
+```
 
 ## Configuration
 
-Update `01-configmap.yaml` with the correct `COMFYUI_BASE_URL` for your environment.
+Update `base/configmap.yaml` or use an overlay to set the correct `COMFYUI_BASE_URL` for your environment.
 
 ## Workload Identity
 

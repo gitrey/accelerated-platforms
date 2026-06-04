@@ -54,3 +54,4 @@
 | T-0034 | F-0010 | Create Cloud Build triggers for frontend and backend | DevOps | Completed |
 | T-0035 | F-0010 | Update Cloud Build configs with deployment steps | DevOps | Completed |
 | T-0036 | F-0010 | Implement automated deployment CD pipeline | DevOps | Completed |
+| T-0037 | F-0010 | Refactor GKE manifests to use Kustomize | SWE-2 | Completed |

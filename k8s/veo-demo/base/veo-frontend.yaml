@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: veo-frontend
-        image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/veo-frontend:latest
+        image: veo-frontend:latest
         ports:
         - containerPort: 80
         resources:
