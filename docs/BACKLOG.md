@@ -2,15 +2,16 @@
 
 | ID | Priority | Status | Title | JIRA ID | Spec |
 |----|----------|--------|-------|---------|------|
-| F-0001 | P1 | Complete | H100 Gemma 3 27b Inference Expansion | TBD | [F-0001](specs/F-0001-h100-gemma-3-27b-inference-expansion.md) |
-| F-0002 | P2 | Complete | Weather Monitoring in Top US Cities | TBD | [F-0002](specs/F-0002-weather-monitoring.md) |
-| F-0003 | P3 | Complete | The Best Beachfront House in the World | TBD | [F-0003](specs/F-0003-best-house-in-the-world.md) |
-| F-0004 | P1 | Complete | Detailed Documentation for CWS Image Pipeline (Milestone 7) | TBD | [F-0004](specs/F-0004-cws-image-pipeline-documentation.md) |
-| F-0005 | P2 | Complete | Agentic Development and Operations with Scion Reference Guide | TBD | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
-| F-0006 | P1 | Complete | Migration Framework: LangChain Agent to ADK 2.0 (Scion) | TBD | [F-0006](specs/F-0006-langchain-to-adk-migration.md) |
-| F-0007 | P2 | Complete | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | TBD | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
-| F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | TBD | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
-| F-0009 | P1 | Complete | Veo Gen Media Demo App | TBD | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
+| F-0001 | P1 | Complete | H100 Gemma 3 27b Inference Expansion | LOCAL | [F-0001](specs/F-0001-h100-gemma-3-27b-inference-expansion.md) |
+| F-0002 | P2 | Complete | Weather Monitoring in Top US Cities | LOCAL | [F-0002](specs/F-0002-weather-monitoring.md) |
+| F-0003 | P3 | Complete | The Best Beachfront House in the World | LOCAL | [F-0003](specs/F-0003-best-house-in-the-world.md) |
+| F-0004 | P1 | Complete | Detailed Documentation for CWS Image Pipeline (Milestone 7) | LOCAL | [F-0004](specs/F-0004-cws-image-pipeline-documentation.md) |
+| F-0005 | P2 | Complete | Agentic Development and Operations with Scion Reference Guide | LOCAL | [F-0005](specs/F-0005-agentic-ops-reference-guide.md) |
+| F-0006 | P1 | Complete | Migration Framework: LangChain Agent to ADK 2.0 (Scion) | LOCAL | [F-0006](specs/F-0006-langchain-to-adk-migration.md) |
+| F-0007 | P2 | Complete | Smart Ultrasonic Toothbrush for Dogs (CanineCare Pro) | LOCAL | [F-0007](specs/F-0007-smart-dog-toothbrush.md) |
+| F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | LOCAL | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
+| F-0009 | P1 | Complete | Veo Gen Media Demo App | LOCAL | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
+| F-0010 | P1 | Approved | Veo Demo App GKE Deployment Automation | LOCAL | [F-0010](specs/F-0010-veo-demo-app-gke-deployment-automation.md) |
 
 
 ## Technical Tasks
@@ -50,3 +51,9 @@
 | T-0031 | F-0009 | Update workflow-api to support Veo generation endpoints | SWE-2 | Completed |
 | T-0032 | F-0009 | Containerize demo app and create Kubernetes manifests | DevOps | Completed |
 | T-0033 | F-0009 | Perform end-to-end testing of generation workflows | SWE-Test | Completed |
+| T-0034 | F-0010 | Create Cloud Build triggers for frontend and backend | DevOps | To Do |
+| T-0035 | F-0010 | Refactor GKE manifests to use Kustomize for env configs | SWE-2 | To Do |
+| T-0036 | F-0010 | Implement automated deployment CD pipeline | DevOps | To Do |
+| T-0037 | F-0010 | Implement health check and smoke test script | SWE-1 | Completed |
+| T-0038 | F-0010 | Configure IAP and Ingress automation via Terraform | TPM | In Progress |
+| T-0039 | F-0010 | Perform final verification of deployment automation | SWE-Test | To Do |
