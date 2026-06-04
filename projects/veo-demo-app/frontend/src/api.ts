@@ -69,7 +69,7 @@ export const triggerVeo3ImageToVideo = (data: Veo3ImageToVideoRequest) => {
 
 export const uploadImage = async (file: File) => {
   const formData = new FormData();
-  formData.append('image', file);
+  formData.append('file', file);
   const response = await api.post('/veo/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
