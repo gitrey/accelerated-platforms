@@ -30,6 +30,7 @@ type Config struct {
 	AllowedAuthDomain string // Optional: Restrict login to a specific GSuite domain (e.g., "example.com")
 	ServerPort        string
 	GinMode           string // "debug" or "release"
+	VeoAssetsBucket   string
 }
 
 func LoadConfig() *Config {
@@ -45,6 +46,7 @@ func LoadConfig() *Config {
 		AllowedAuthDomain: getEnv("ALLOWED_AUTH_DOMAIN", ""), // Optional
 		ServerPort:        getEnv("SERVER_PORT", "8080"),
 		GinMode:           getEnv("GIN_MODE", "release"),
+		VeoAssetsBucket:   getEnv("VEO_ASSETS_BUCKET", "veo-demo-assets"),
 	}
 
 	// Validate URL format (basic check)

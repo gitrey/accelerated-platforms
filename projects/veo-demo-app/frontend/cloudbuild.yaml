@@ -1,0 +1,33 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+steps:
+  - id: "Build veo-frontend image"
+    name: "gcr.io/kaniko-project/executor:latest"
+    args:
+      - --cache=true
+      - --cache-ttl=48h
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/veo-frontend:latest
+      - --log-format=text
+      - --log-timestamp=false
+      - --verbosity=info
+    waitFor: ["-"]
+
+  - id: "Deploy to GKE"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_CLUSTER_LOCATION} --project ${PROJECT_ID}
+        export REGION=${_REGION}
+        export AR_REPO=${_AR_REPO}
+        for f in k8s/veo-demo/*.yaml; do
+          envsubst < "$f" | kubectl apply -f -
+        done
+    waitFor: ["Build veo-frontend image"]
+
+substitutions:
+  _REGION: us-central1
+  _AR_REPO: veo-demo
+  _CLUSTER_NAME: main-cluster
+  _CLUSTER_LOCATION: us-central1

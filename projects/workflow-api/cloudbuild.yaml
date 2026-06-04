@@ -1,27 +1,33 @@
-# Copyright 2025 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
-  - args:
+  - id: "Build workflow-api image"
+    name: "gcr.io/kaniko-project/executor:latest"
+    args:
       - --cache=true
       - --cache-ttl=48h
-      - --destination=${_DESTINATION}
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/workflow-api:latest
       - --log-format=text
       - --log-timestamp=false
       - --verbosity=info
-    id: "Build workflow-api image"
-    name: "gcr.io/kaniko-project/executor:latest"
     waitFor: ["-"]
+
+  - id: "Deploy to GKE"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_CLUSTER_LOCATION} --project ${PROJECT_ID}
+        export REGION=${_REGION}
+        export AR_REPO=${_AR_REPO}
+        for f in k8s/veo-demo/*.yaml; do
+          envsubst < "$f" | kubectl apply -f -
+        done
+    waitFor: ["Build workflow-api image"]
+
+substitutions:
+  _REGION: us-central1
+  _AR_REPO: veo-demo
+  _CLUSTER_NAME: main-cluster
+  _CLUSTER_LOCATION: us-central1
