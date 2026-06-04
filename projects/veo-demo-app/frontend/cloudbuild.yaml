@@ -1,12 +1,12 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
-  - id: "Build workflow-api image"
+  - id: "Build veo-frontend image"
     name: "gcr.io/kaniko-project/executor:latest"
     args:
       - --cache=true
       - --cache-ttl=48h
-      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/workflow-api:latest
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/veo-frontend:latest
       - --log-format=text
       - --log-timestamp=false
       - --verbosity=info
@@ -24,7 +24,7 @@ steps:
         for f in k8s/veo-demo/*.yaml; do
           envsubst < "$f" | kubectl apply -f -
         done
-    waitFor: ["Build workflow-api image"]
+    waitFor: ["Build veo-frontend image"]
 
 substitutions:
   _REGION: us-central1

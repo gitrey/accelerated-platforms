@@ -15,35 +15,30 @@
 
 set -e
 
-PROJECT_ID=$(gcloud config get-value project)
-REGION=${REGION:-us-central1}
-AR_REPO=${AR_REPO:-veo-demo-repo}
+export PROJECT_ID=$(gcloud config get-value project)
+export REGION=${REGION:-us-central1}
+export AR_REPO=${AR_REPO:-veo-demo}
 
 echo "Deploying Veo Gen Media Demo App to Project: $PROJECT_ID"
 
-# 1. Ensure Artifact Registry repository exists (optional step, usually done via Terraform)
-# gcloud artifacts repositories create $AR_REPO --repository-format=docker --location=$REGION --quiet || true
-
-# 2. Build and Push Images
+# 1. Build and Push Images
 echo "Building workflow-api..."
 gcloud builds submit projects/workflow-api \
     --config projects/workflow-api/cloudbuild.yaml \
-    --substitutions _DESTINATION="gcr.io/$PROJECT_ID/workflow-api:latest" \
+    --substitutions _DESTINATION="$REGION-docker.pkg.dev/$PROJECT_ID/$AR_REPO/workflow-api:latest" \
     --quiet
 
 echo "Building veo-frontend..."
-gcloud builds submit projects/veo-frontend \
-    --config projects/veo-frontend/cloudbuild.yaml \
-    --substitutions _DESTINATION="gcr.io/$PROJECT_ID/veo-frontend:latest" \
+gcloud builds submit projects/veo-demo-app/frontend \
+    --config projects/veo-demo-app/frontend/cloudbuild.yaml \
+    --substitutions _DESTINATION="$REGION-docker.pkg.dev/$PROJECT_ID/$AR_REPO/veo-frontend:latest" \
     --quiet
 
-# 3. Apply Kubernetes Manifests
+# 2. Apply Kubernetes Manifests
 echo "Applying Kubernetes manifests..."
-# Note: Using sed to replace PROJECT_ID in manifests if necessary, 
-# but manifests already use ${PROJECT_ID} which can be handled by envsubst if needed.
-# For simplicity, we assume the user has envsubst or we use sed.
 
 for f in k8s/veo-demo/*.yaml; do
+    # Using envsubst to replace ${PROJECT_ID}, ${REGION}, and ${AR_REPO}
     envsubst < "$f" | kubectl apply -f -
 done
 

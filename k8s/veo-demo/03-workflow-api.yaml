@@ -16,7 +16,7 @@ spec:
       serviceAccountName: workflow-api-sa
       containers:
       - name: workflow-api
-        image: gcr.io/${PROJECT_ID}/workflow-api:latest
+        image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/workflow-api:latest
         ports:
         - containerPort: 8080
         env:
@@ -35,6 +35,11 @@ spec:
             configMapKeyRef:
               name: veo-demo-config
               key: ALLOWED_AUTH_DOMAIN
+        - name: VEO_ASSETS_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: veo-demo-config
+              key: VEO_ASSETS_BUCKET
         - name: GIN_MODE
           value: "release"
         resources:

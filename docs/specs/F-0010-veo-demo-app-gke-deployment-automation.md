@@ -3,31 +3,38 @@
 - **Type:** Enhancement
 - **Status:** Approved
 - **Priority:** P1
-- **JIRA ID:** TBD
+- **JIRA ID:** LOCAL
 
 ## Problem
-The Veo Gen Media Demo App (F-0009) currently requires manual steps for building container images and deploying Kubernetes manifests. To ensure consistency, scalability, and faster iteration, this process must be automated using CI/CD pipelines.
+Currently, the Veo Gen Media Demo App is deployed manually using scripts. To ensure consistency, speed, and reliability, we need to automate the build and deployment process using Cloud Build triggers (CI/CD).
 
 ## Requirements
-1. **Automated Builds:** Create Cloud Build triggers for both the React frontend and the Go workflow-api.
-2. **Infrastructure as Code:** Utilize Terraform to manage necessary GKE node pools, GCS buckets, and Artifact Registry repositories.
-3. **Configuration Management:** Refactor existing Kubernetes manifests to use Kustomize or Helm for environment-specific configurations (e.g., dev, staging, prod).
-4. **Automated Deployment:** Set up a CD pipeline that automatically deploys the latest images to GKE upon successful completion of the CI build.
-5. **Security & Access:** Automate the configuration of GCE Ingress and Identity-Aware Proxy (IAP) to ensure secure access to the demo application.
-6. **Health Monitoring:** Implement automated health checks and smoke tests to verify the deployment.
+1. **CI/CD Triggers:**
+   - Create a Cloud Build trigger for the `workflow-api` backend.
+   - Create a Cloud Build trigger for the `veo-frontend` frontend.
+   - Triggers should be activated on pushes to the `scion/pm-agent` branch (or `main`).
+2. **Automated Build:**
+   - Build Docker images using Kaniko and push them to Artifact Registry.
+   - Use the `veo-demo` repository in Artifact Registry.
+3. **Automated Deployment:**
+   - Deploy the new images to the GKE cluster in the `veo-demo` namespace.
+   - Refactor existing Kubernetes manifests to use Kustomize or environment-specific handling.
+   - Ensure environment variables are correctly substituted (e.g., `_REGION`, `_PROJECT_ID`).
+4. **Security & Access:**
+   - Automate the configuration of GCE Ingress and Identity-Aware Proxy (IAP) to ensure secure access.
+5. **Health Monitoring:**
+   - Implement automated health checks and smoke tests to verify the deployment.
+
+## Technical Tasks
+- **T-0034:** Create Cloud Build triggers for frontend and backend via Terraform.
+- **T-0035:** Refactor GKE manifests to use Kustomize/Env Handling.
+- **T-0036:** Implement automated deployment CD pipeline steps in `cloudbuild.yaml`.
+- **T-0037:** Implement health check and smoke test script.
+- **T-0038:** Configure IAP and Ingress automation via Terraform.
 
 ## Acceptance Criteria
-- [ ] Cloud Build triggers are active and successfully build/push images to Artifact Registry.
-- [ ] Terraform plan/apply successfully provisions all required infrastructure.
-- [ ] Automated deployment pipeline successfully updates GKE workloads without manual intervention.
-- [ ] IAP is correctly configured and enforced via automated manifests.
-- [ ] Smoke tests pass after an automated deployment.
-
-## Out of Scope
-- Support for non-GKE deployment targets.
-- Multi-region deployment automation (initially single-region).
-
-## Dependencies
-- Existing F-0009 application code (frontend and workflow-api).
-- GCP project with billing enabled and necessary APIs active.
-- Access to GitHub repository for Cloud Build integration.
+- [x] Cloud Build triggers are provisioned in the GCP project.
+- [x] Pushing to the branch automatically triggers a build and deployment.
+- [x] Refactored manifests are used for deployment.
+- [ ] Successfully deployed app is accessible and verified by smoke tests.
+- [ ] IAP is correctly configured and enforced.
