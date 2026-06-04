@@ -32,6 +32,7 @@ The objective of this testing is to verify the integration between the React fro
 |------|-------|--------|--------|----------|
 | 2026-06-03 | - | - | SWE-Test | Test plan initialized. |
 | 2026-06-03 | TC-01-09 | PASSED | SWE-Test | Full implementation verified via code review, unit tests, and integration manifests. |
+| 2026-06-04 | TC-02-05 | PASSED | SWE-Test | Verified Image-to-Video and Text-to-Video workflow construction via enhanced Go unit tests. Fixed URL validation bug. |
 
 ## 5. Summary of Results
 - **Total Test Cases:** 9
