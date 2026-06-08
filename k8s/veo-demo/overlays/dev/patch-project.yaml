@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: veo-demo-config
+  namespace: veo-demo
+data:
+  VEO_ASSETS_BUCKET: "veo-media-dev"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: workflow-api-sa
+  namespace: veo-demo
+  annotations:
+    iam.gke.io/gcp-service-account: workflow-api-sa@PROJECT_ID.iam.gserviceaccount.com
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workflow-api
+  namespace: veo-demo
+spec:
+  template:
+    spec:
+      containers:
+      - name: workflow-api
+        image: workflow-api:latest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veo-frontend
+  namespace: veo-demo
+spec:
+  template:
+    spec:
+      containers:
+      - name: veo-frontend
+        image: veo-frontend:latest
