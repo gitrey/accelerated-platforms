@@ -15,3 +15,7 @@ accelerating onboarding and productivity.
   - [Cloud Workstations reference implementation](/docs/platforms/cws/reference-implementation.md)
 
 ## Additional Reading
+
+- [Cloud Workstations Image Pipeline](/docs/platforms/cws/image-pipeline.md)
+- [Cloud Workstations configuration](/docs/platforms/cws/configuration.md)
+- [Cloud Workstations troubleshooting](/docs/platforms/cws/troubleshooting.md)

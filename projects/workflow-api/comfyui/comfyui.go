@@ -47,6 +47,10 @@ func NewClient(baseURL string, clientID ...string) (*Client, error) {
 		return nil, fmt.Errorf("invalid base URL: %w", err)
 	}
 
+	if httpURL.Scheme != "http" && httpURL.Scheme != "https" {
+		return nil, fmt.Errorf("invalid scheme: %s, must be http or https", httpURL.Scheme)
+	}
+
 	wsScheme := "ws"
 	if httpURL.Scheme == "https" {
 		wsScheme = "wss"
@@ -73,6 +77,18 @@ func NewClient(baseURL string, clientID ...string) (*Client, error) {
 // SetTimeout allows customizing the HTTP client timeout.
 func (c *Client) SetTimeout(timeout time.Duration) {
 	c.HTTPClient.Timeout = timeout
+}
+
+// OpenWebsocketConnectionWithClientID establishes a WebSocket connection with a specific client ID.
+func (c *Client) OpenWebsocketConnectionWithClientID(clientID string) (*websocket.Conn, error) {
+	u := fmt.Sprintf("%s/ws?clientId=%s", c.WSBaseURL, clientID)
+	fmt.Printf("Connecting to WebSocket: %s\n", u)
+
+	conn, _, err := websocket.DefaultDialer.Dial(u, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to websocket: %w", err)
+	}
+	return conn, nil
 }
 
 // OpenWebsocketConnection establishes a WebSocket connection to the ComfyUI server.
@@ -293,12 +309,65 @@ func LoadWorkflow(workflowPath string) (Workflow, error) {
 	return workflow, nil
 }
 
-// --- Placeholder for more complex functions like TrackProgress ---
-// type WebsocketMessage struct {
-// 	Type string      `json:"type"`
-// 	Data interface{} `json:"data"`
-// }
-//
-// func (c *Client) TrackProgress(conn *websocket.Conn, promptID string, expectedNodeCount int) error {
-// ... implementation ...
-// }
+// WebsocketMessage represents a message received from ComfyUI via WebSocket.
+type WebsocketMessage struct {
+	Type string                 `json:"type"`
+	Data map[string]interface{} `json:"data"`
+}
+
+// ProgressData represents the progress information from ComfyUI.
+type ProgressData struct {
+	Value int `json:"value"`
+	Max   int `json:"max"`
+}
+
+// TrackProgress connects to the WebSocket and sends progress updates to the provided channel.
+// It stops when the prompt with the given ID is completed or if an error occurs.
+func (c *Client) TrackProgress(promptID string, progressChan chan<- ProgressData) error {
+	return c.TrackProgressWithClientID(promptID, c.ClientID, progressChan)
+}
+
+// TrackProgressWithClientID connects to the WebSocket with a specific clientID and sends progress updates.
+func (c *Client) TrackProgressWithClientID(promptID string, clientID string, progressChan chan<- ProgressData) error {
+	conn, err := c.OpenWebsocketConnectionWithClientID(clientID)
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+	return c.TrackProgressWithConnection(promptID, conn, progressChan)
+}
+
+// TrackProgressWithConnection uses an existing WebSocket connection to track progress.
+func (c *Client) TrackProgressWithConnection(promptID string, conn *websocket.Conn, progressChan chan<- ProgressData) error {
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			return fmt.Errorf("websocket read error: %w", err)
+		}
+
+		var msg WebsocketMessage
+		if err := json.Unmarshal(message, &msg); err != nil {
+			continue // Skip messages that don't match the expected format
+		}
+
+		switch msg.Type {
+		case "progress":
+			if data, ok := msg.Data["value"].(float64); ok {
+				max := 0.0
+				if m, ok := msg.Data["max"].(float64); ok {
+					max = m
+				}
+				progressChan <- ProgressData{Value: int(data), Max: int(max)}
+			}
+		case "executing":
+			if node, ok := msg.Data["node"].(string); ok && node == "" {
+				// We still need 'executed' to be sure it's OUR prompt.
+				// But some workflows might not send 'executed' if they fail.
+			}
+		case "executed":
+			if id, ok := msg.Data["prompt_id"].(string); ok && id == promptID {
+				return nil
+			}
+		}
+	}
+}
