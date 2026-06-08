@@ -12,6 +12,7 @@
 | F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | LOCAL | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
 | F-0009 | P1 | Complete | Veo Gen Media Demo App | LOCAL | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
 | F-0010 | P1 | Complete | Veo Demo App GKE Deployment Automation | LOCAL | [F-0010](specs/F-0010-veo-demo-app-gke-deployment-automation.md) |
+| F-0011 | P2 | Approved | Veo Demo UI Enhancements for Backend Visibility | LOCAL | [F-0011](specs/F-0011-veo-demo-ui-enhancements.md) |
 
 
 ## Technical Tasks
@@ -57,4 +58,9 @@
 | T-0037 | F-0010 | Implement health check and smoke test script | SWE-1 | Completed |
 | T-0038 | F-0010 | Configure IAP and Ingress automation via Terraform | TPM | Completed |
 | T-0039 | F-0010 | Perform final verification of deployment automation | SWE-Test | Completed |
+| T-0040 | F-0011 | Move backend health check to /api/v1/health | SWE-2 | To Do |
+| T-0041 | F-0011 | Implement Health Status Indicator in React UI | SWE-1 | To Do |
+| T-0042 | F-0011 | Implement Visual Progress Stepper for generation pipeline | SWE-1 | To Do |
+| T-0043 | F-0011 | Add API Documentation and Environment links to UI | SWE-1 | To Do |
+| T-0044 | F-0011 | Verify UI enhancements against backend events | SWE-Test | To Do |
 
