@@ -12,6 +12,7 @@
 | F-0008 | P2 | Complete | Google I/O Tracker Agent (ADK 2.0) | TBD | [F-0008](specs/F-0008-google-io-tracker-agent.md) |
 | F-0009 | P1 | Complete | Veo Gen Media Demo App | TBD | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
 | F-0010 | P1 | Complete | Veo Demo App GKE Deployment Automation | TBD | [F-0010](specs/F-0010-veo-demo-app-gke-deployment-automation.md) |
+| F-0011 | P2 | Complete | Veo Demo UI Enhancements | TBD | [F-0011](specs/F-0011-veo-demo-ui-enhancements.md) |
 
 
 ## Technical Tasks
@@ -55,3 +56,4 @@
 | T-0035 | F-0010 | Update Cloud Build configs with deployment steps | DevOps | Completed |
 | T-0036 | F-0010 | Implement automated deployment CD pipeline | DevOps | Completed |
 | T-0037 | F-0010 | Refactor GKE manifests to use Kustomize | SWE-2 | Completed |
+| T-0040 | F-0011 | Move backend health check to /api/v1/health | SWE-2 | Completed |
