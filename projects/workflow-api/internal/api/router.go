@@ -46,7 +46,7 @@ func SetupRouter(cfg *config.Config, comfyClient *comfyui.Client) *gin.Engine {
 	))
 
 	// Create API handler instance
-	apiHandler := NewAPIHandler(comfyClient)
+	apiHandler := NewAPIHandler(comfyClient, cfg)
 
 	// API v1 Group with Authentication Middleware
 	v1 := router.Group("/api/v1")
@@ -58,6 +58,16 @@ func SetupRouter(cfg *config.Config, comfyClient *comfyui.Client) *gin.Engine {
 		v1.GET("/image", apiHandler.GetImage)
 		v1.POST("/upload_image", apiHandler.UploadImage)
 		// Add other ComfyUI client functions here if needed
+
+		// Veo Generation Routes
+		veo := v1.Group("/veo")
+		{
+			veo.POST("/upload", apiHandler.TriggerVeoUpload)
+			veo.POST("/veo2/text-to-video", apiHandler.TriggerVeo2TextToVideo)
+			veo.POST("/veo2/image-to-video", apiHandler.TriggerVeo2ImageToVideo)
+			veo.POST("/veo3/text-to-video", apiHandler.TriggerVeo3TextToVideo)
+			veo.POST("/veo3/image-to-video", apiHandler.TriggerVeo3ImageToVideo)
+		}
 	}
 
 	return router

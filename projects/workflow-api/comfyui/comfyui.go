@@ -47,6 +47,10 @@ func NewClient(baseURL string, clientID ...string) (*Client, error) {
 		return nil, fmt.Errorf("invalid base URL: %w", err)
 	}
 
+	if httpURL.Scheme != "http" && httpURL.Scheme != "https" {
+		return nil, fmt.Errorf("invalid URL scheme: %s, must be http or https", httpURL.Scheme)
+	}
+
 	wsScheme := "ws"
 	if httpURL.Scheme == "https" {
 		wsScheme = "wss"
@@ -293,12 +297,58 @@ func LoadWorkflow(workflowPath string) (Workflow, error) {
 	return workflow, nil
 }
 
-// --- Placeholder for more complex functions like TrackProgress ---
-// type WebsocketMessage struct {
-// 	Type string      `json:"type"`
-// 	Data interface{} `json:"data"`
-// }
-//
-// func (c *Client) TrackProgress(conn *websocket.Conn, promptID string, expectedNodeCount int) error {
-// ... implementation ...
-// }
+// WebsocketMessage represents a message received from ComfyUI via WebSocket.
+type WebsocketMessage struct {
+	Type string                 `json:"type"`
+	Data map[string]interface{} `json:"data"`
+}
+
+// ProgressData represents the progress information from ComfyUI.
+type ProgressData struct {
+	Value int `json:"value"`
+	Max   int `json:"max"`
+}
+
+// TrackProgress connects to the WebSocket and sends progress updates to the provided channel.
+// It stops when the prompt with the given ID is completed or if an error occurs.
+func (c *Client) TrackProgress(promptID string, progressChan chan<- ProgressData) error {
+	conn, err := c.OpenWebsocketConnection()
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			return fmt.Errorf("websocket read error: %w", err)
+		}
+
+		var msg WebsocketMessage
+		if err := json.Unmarshal(message, &msg); err != nil {
+			continue // Skip messages that don't match the expected format
+		}
+
+		switch msg.Type {
+		case "progress":
+			if data, ok := msg.Data["value"].(float64); ok {
+				max := 0.0
+				if m, ok := msg.Data["max"].(float64); ok {
+					max = m
+				}
+				progressChan <- ProgressData{Value: int(data), Max: int(max)}
+			}
+		case "executing":
+			if node, ok := msg.Data["node"].(string); ok && node == "" {
+				// ComfyUI sends node: null (which unmarshals to empty string or nil) when execution is finished
+				// We need to check if the prompt ID matches, but 'executing' message doesn't always include prompt_id.
+				// However, if we receive executing null, it usually means the current queue item finished.
+				return nil
+			}
+		case "executed":
+			if id, ok := msg.Data["prompt_id"].(string); ok && id == promptID {
+				return nil
+			}
+		}
+	}
+}
