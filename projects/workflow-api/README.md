@@ -7,8 +7,9 @@ This service provides a REST API to interface with ComfyUI workflows, specifical
 - **Queue Prompts:** Submit arbitrary ComfyUI workflows.
 - **History & Results:** Retrieve execution status and generated assets.
 - **Veo Support:** Dedicated endpoints for Veo 2.0 and Veo 3.1 text-to-video and image-to-video.
-- **Progress Tracking:** Stream real-time generation progress via Server-Sent Events (SSE).
+- **Progress Tracking:** Stream real-time generation progress via Server-Sent Events (SSE). Supports concurrent requests with unique ClientIDs.
 - **GCS Integration:** Upload media to GCS and trigger workflows that use GCS URIs.
+- **Health Check:** Standardized health check endpoint at `/api/v1/health`.
 
 ## Veo Endpoints
 
@@ -41,3 +42,7 @@ The service is configured via environment variables:
 1. Install dependencies: `go mod download`
 2. Run the server: `go run cmd/server/main.go`
 3. Access Swagger UI: `http://localhost:8080/swagger/index.html`
+
+## Monitoring
+
+- **Health Check:** `GET /api/v1/health` - Returns `{"status": "UP"}` if the service is running.
