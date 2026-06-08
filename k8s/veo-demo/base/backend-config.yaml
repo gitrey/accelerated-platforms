@@ -1,0 +1,9 @@
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: veo-demo-backend-config
+  namespace: veo-demo
+spec:
+  iap:
+    enabled: true
+    oauthclientSecretName: iap-oauth-client-secret

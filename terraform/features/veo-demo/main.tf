@@ -159,3 +159,10 @@ output "veo_media_bucket" {
 output "artifact_registry_repo" {
   value = google_artifact_registry_repository.veo_demo.name
 }
+
+# IAP IAM policy for access
+resource "google_iap_web_iam_member" "iap_access" {
+  project = var.project_id
+  role    = "roles/iap.httpsResourceAccessor"
+  member  = "group:accelerated-platforms-users@google.com" # Example group
+}

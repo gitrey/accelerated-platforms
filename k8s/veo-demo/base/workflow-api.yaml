@@ -55,6 +55,8 @@ kind: Service
 metadata:
   name: workflow-api
   namespace: veo-demo
+  annotations:
+    cloud.google.com/backend-config: '{"default": "veo-demo-backend-config"}'
 spec:
   selector:
     app: workflow-api
