@@ -59,7 +59,7 @@
 | T-0038 | F-0010 | Configure IAP and Ingress automation via Terraform | TPM | Completed |
 | T-0039 | F-0010 | Perform final verification of deployment automation | SWE-Test | Completed |
 | T-0040 | F-0011 | Move backend health check to /api/v1/health | SWE-2 | Completed |
-| T-0041 | F-0011 | Implement Health Status Indicator in React UI | SWE-1 | To Do |
-| T-0042 | F-0011 | Implement Visual Progress Stepper for generation pipeline | SWE-1 | To Do |
-| T-0043 | F-0011 | Add API Documentation and Environment links to UI | SWE-1 | To Do |
+| T-0041 | F-0011 | Implement Health Status Indicator in React UI | SWE-1 | Completed |
+| T-0042 | F-0011 | Implement Visual Progress Stepper for generation pipeline | SWE-1 | Completed |
+| T-0043 | F-0011 | Add API Documentation and Environment links to UI | SWE-1 | Completed |
 | T-0044 | F-0011 | Verify UI enhancements against backend events | SWE-Test | To Do |

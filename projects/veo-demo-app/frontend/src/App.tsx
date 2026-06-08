@@ -18,6 +18,7 @@ import {
   triggerVeo3TextToVideo, 
   triggerVeo3ImageToVideo,
   uploadImage,
+  checkHealth,
   type Veo3ImageToVideoRequest 
 } from './api';
 
@@ -27,7 +28,7 @@ type Mode = 'Text-to-Video' | 'Image-to-Video';
 interface ProgressMessage {
   type: 'progress' | 'status' | 'result' | 'error';
   message: string;
-  data?: any;
+  data?: unknown;
 }
 
 function App() {
@@ -43,8 +44,32 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [backendStatus, setBackendStatus] = useState<'online' | 'offline' | 'checking'>('checking');
+  const [currentStep, setCurrentStep] = useState<number>(0);
   
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const steps = [
+    { id: 1, label: 'Preparing', description: 'Uploading assets' },
+    { id: 2, label: 'Queued', description: 'Waiting for worker' },
+    { id: 3, label: 'Generating', description: 'Veo model running' },
+    { id: 4, label: 'Finalizing', description: 'Saving results' },
+  ];
+
+  useEffect(() => {
+    const checkBackend = async () => {
+      try {
+        await checkHealth();
+        setBackendStatus('online');
+      } catch {
+        setBackendStatus('offline');
+      }
+    };
+
+    checkBackend();
+    const interval = setInterval(checkBackend, 30000); // Check every 30 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -56,6 +81,7 @@ function App() {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSelectedImage(file);
+      if (imagePreview) URL.revokeObjectURL(imagePreview);
       setImagePreview(URL.createObjectURL(file));
     }
   };
@@ -65,6 +91,7 @@ function App() {
     setProgress([]);
     setResultVideo(null);
     setError(null);
+    setCurrentStep(1);
 
     try {
       let imageGcsUri = '';
@@ -74,6 +101,8 @@ function App() {
         imageGcsUri = uploadResp.gcs_uri;
         setProgress(prev => [...prev, { type: 'status', message: 'Image uploaded successfully.' }]);
       }
+
+      setCurrentStep(2);
 
       const request: Veo3ImageToVideoRequest = {
         prompt,
@@ -123,14 +152,22 @@ function App() {
         for (const line of lines) {
           if (line.startsWith('data: ')) {
             try {
-              const data = JSON.parse(line.substring(6));
-              setProgress(prev => [...prev, data]);
+              const data = JSON.parse(line.substring(6)) as ProgressMessage;
+              setProgress(prev => [...prev, data].slice(-50));
               
-              if (data.type === 'result' && data.data?.video_url) {
-                setResultVideo(data.data.video_url);
+              if (data.type === 'progress') {
+                setCurrentStep(3);
+              }
+              if (data.type === 'result') {
+                setCurrentStep(4);
+                const resultData = data.data as { video_url?: string };
+                if (resultData?.video_url) {
+                  setResultVideo(resultData.video_url);
+                }
               }
               if (data.type === 'error') {
                 setError(data.message);
+                setCurrentStep(0);
               }
             } catch (e) {
               console.error('Error parsing SSE data', e);
@@ -138,8 +175,10 @@ function App() {
           }
         }
       }
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred';
+      setError(errorMessage);
+      setCurrentStep(0);
     } finally {
       setIsGenerating(false);
     }
@@ -156,7 +195,20 @@ function App() {
             </div>
             <h1 className="text-xl font-bold tracking-tight">Veo <span className="text-blue-500">Demo</span></h1>
           </div>
-          <div className="flex items-center space-x-2 bg-gray-800 p-1 rounded-lg">
+          <div className="flex items-center space-x-4">
+            <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-medium border ${
+              backendStatus === 'online' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+              backendStatus === 'offline' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+              'bg-gray-500/10 text-gray-400 border-gray-500/20'
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${
+                backendStatus === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' :
+                backendStatus === 'offline' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]' :
+                'bg-gray-500 animate-pulse'
+              }`} />
+              <span>Backend: {backendStatus.charAt(0).toUpperCase() + backendStatus.slice(1)}</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-gray-800 p-1 rounded-lg">
             {(['Veo 2.0', 'Veo 3.1'] as Model[]).map((m) => (
               <button
                 key={m}
@@ -170,7 +222,8 @@ function App() {
             ))}
           </div>
         </div>
-      </header>
+      </div>
+    </header>
 
       <main className="flex-1 max-w-7xl mx-auto w-full p-6 flex flex-col lg:flex-row gap-8">
         {/* Left Sidebar - Controls */}
@@ -320,6 +373,47 @@ function App() {
 
         {/* Right Content - Results & Progress */}
         <div className="flex-1 flex flex-col gap-6 min-h-[600px]">
+          {/* Visual Progress Stepper */}
+          {isGenerating && (
+            <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 shadow-xl animate-in fade-in slide-in-from-top-4 duration-500">
+              <div className="flex items-center justify-between relative">
+                {steps.map((step, index) => (
+                  <div key={step.id} className="flex-1 flex flex-col items-center relative">
+                    {/* Line between steps */}
+                    {index < steps.length - 1 && (
+                      <div className={`absolute top-5 left-[50%] w-full h-0.5 -z-0 transition-colors duration-500 ${
+                        currentStep > step.id ? 'bg-blue-600' : 'bg-gray-800'
+                      }`} />
+                    )}
+                    
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 z-10 transition-all duration-500 ${
+                      currentStep === step.id ? 'border-blue-500 bg-blue-500/20 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.3)]' :
+                      currentStep > step.id ? 'border-blue-600 bg-blue-600 text-white' :
+                      'border-gray-800 bg-gray-900 text-gray-600'
+                    }`}>
+                      {currentStep > step.id ? (
+                        <CheckCircle2 className="w-6 h-6" />
+                      ) : currentStep === step.id ? (
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                      ) : (
+                        <span className="text-sm font-bold">{step.id}</span>
+                      )}
+                    </div>
+                    
+                    <div className="mt-3 text-center">
+                      <p className={`text-xs font-bold ${currentStep >= step.id ? 'text-gray-200' : 'text-gray-600'}`}>
+                        {step.label}
+                      </p>
+                      <p className="text-[10px] text-gray-500 mt-1 hidden md:block">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Result Area */}
           <div className="bg-gray-900 rounded-xl border border-gray-800 flex-1 overflow-hidden flex flex-col shadow-xl">
             <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between">
@@ -414,9 +508,30 @@ function App() {
         </div>
       </main>
 
-      <footer className="border-t border-gray-800 py-6 bg-gray-900/30">
-        <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
-          <p>© 2026 Accelerated Platforms. Powered by Google Veo & ComfyUI.</p>
+      <footer className="border-t border-gray-800 py-8 bg-gray-900/30">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-gray-500 text-sm">
+            <p>© 2026 Accelerated Platforms. Powered by Google Veo & ComfyUI.</p>
+          </div>
+          <div className="flex items-center space-x-6">
+            <a 
+              href="/api/swagger/index.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-gray-400 hover:text-blue-400 flex items-center transition-colors"
+            >
+              <Layers className="w-3.5 h-3.5 mr-1.5" />
+              Developer API
+            </a>
+            <a 
+              href="https://github.com/gitrey/accelerated-platforms" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-gray-400 hover:text-blue-400 flex items-center transition-colors"
+            >
+              Documentation
+            </a>
+          </div>
         </div>
       </footer>
     </div>

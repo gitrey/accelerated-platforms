@@ -78,4 +78,9 @@ export const uploadImage = async (file: File) => {
   return response.data;
 };
 
+export const checkHealth = async () => {
+  const response = await api.get('/health');
+  return response.data;
+};
+
 export default api;
