@@ -24,6 +24,7 @@ import (
 	"cloud.google.com/go/storage"
 	"comfyui-api-service/comfyui"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 // VeoGenerationRequest represents the base parameters for Veo generation.
@@ -177,7 +178,17 @@ func (h *APIHandler) buildVeo3TextToVideoWorkflow(req Veo3GenerationRequest) map
 
 // streamProgress queues the prompt and streams progress via SSE.
 func (h *APIHandler) streamProgress(c *gin.Context, workflow map[string]interface{}) {
-	resp, err := h.ComfyClient.QueuePrompt(workflow)
+	clientID := uuid.New().String()
+
+	// Connect to WebSocket BEFORE queuing to ensure we don't miss the first messages
+	conn, err := h.ComfyClient.OpenWebsocketConnectionWithClientID(clientID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to connect to ComfyUI WebSocket", Details: err.Error()})
+		return
+	}
+	defer conn.Close()
+
+	resp, err := h.ComfyClient.QueuePromptWithClientID(workflow, clientID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to queue prompt", Details: err.Error()})
 		return
@@ -188,7 +199,7 @@ func (h *APIHandler) streamProgress(c *gin.Context, workflow map[string]interfac
 	errChan := make(chan error)
 
 	go func() {
-		errChan <- h.ComfyClient.TrackProgress(promptID, progressChan)
+		errChan <- h.ComfyClient.TrackProgressWithConnection(promptID, conn, progressChan)
 	}()
 
 	c.Header("Content-Type", "text/event-stream")

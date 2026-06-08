@@ -79,6 +79,18 @@ func (c *Client) SetTimeout(timeout time.Duration) {
 	c.HTTPClient.Timeout = timeout
 }
 
+// OpenWebsocketConnectionWithClientID establishes a WebSocket connection with a specific client ID.
+func (c *Client) OpenWebsocketConnectionWithClientID(clientID string) (*websocket.Conn, error) {
+	u := fmt.Sprintf("%s/ws?clientId=%s", c.WSBaseURL, clientID)
+	fmt.Printf("Connecting to WebSocket: %s\n", u)
+
+	conn, _, err := websocket.DefaultDialer.Dial(u, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to websocket: %w", err)
+	}
+	return conn, nil
+}
+
 // OpenWebsocketConnection establishes a WebSocket connection to the ComfyUI server.
 // It uses the client's pre-configured ClientID.
 func (c *Client) OpenWebsocketConnection() (*websocket.Conn, error) {
@@ -312,12 +324,21 @@ type ProgressData struct {
 // TrackProgress connects to the WebSocket and sends progress updates to the provided channel.
 // It stops when the prompt with the given ID is completed or if an error occurs.
 func (c *Client) TrackProgress(promptID string, progressChan chan<- ProgressData) error {
-	conn, err := c.OpenWebsocketConnection()
+	return c.TrackProgressWithClientID(promptID, c.ClientID, progressChan)
+}
+
+// TrackProgressWithClientID connects to the WebSocket with a specific clientID and sends progress updates.
+func (c *Client) TrackProgressWithClientID(promptID string, clientID string, progressChan chan<- ProgressData) error {
+	conn, err := c.OpenWebsocketConnectionWithClientID(clientID)
 	if err != nil {
 		return err
 	}
 	defer conn.Close()
+	return c.TrackProgressWithConnection(promptID, conn, progressChan)
+}
 
+// TrackProgressWithConnection uses an existing WebSocket connection to track progress.
+func (c *Client) TrackProgressWithConnection(promptID string, conn *websocket.Conn, progressChan chan<- ProgressData) error {
 	for {
 		_, message, err := conn.ReadMessage()
 		if err != nil {
@@ -340,10 +361,8 @@ func (c *Client) TrackProgress(promptID string, progressChan chan<- ProgressData
 			}
 		case "executing":
 			if node, ok := msg.Data["node"].(string); ok && node == "" {
-				// ComfyUI sends node: null (which unmarshals to empty string or nil) when execution is finished
-				// We need to check if the prompt ID matches, but 'executing' message doesn't always include prompt_id.
-				// However, if we receive executing null, it usually means the current queue item finished.
-				return nil
+				// We still need 'executed' to be sure it's OUR prompt.
+				// But some workflows might not send 'executed' if they fail.
 			}
 		case "executed":
 			if id, ok := msg.Data["prompt_id"].(string); ok && id == promptID {
