@@ -200,5 +200,17 @@ Completed end-to-end verification for F-0009 (Veo Gen Media Demo App) and final 
     - Documented results in `docs/F-0010-VERIFICATION_RESULTS.md`.
 - Updated `docs/BACKLOG.md` marking T-0033 and T-0039 as Completed.
 
+## Session: 2026-06-04 - F-0010 IAP/Ingress Automation & Wrap-up
+
+### Summary
+Completed the final automation task for F-0010 (IAP and Ingress automation). All technical tasks for F-0010 are now marked as Completed.
+
+### Activities
+- Created `k8s/veo-demo/base/backend-config.yaml` to enable IAP in GKE.
+- Updated `k8s/veo-demo/base/workflow-api.yaml` and `k8s/veo-demo/base/veo-frontend.yaml` services with BackendConfig annotations.
+- Updated `k8s/veo-demo/base/kustomization.yaml` to include the new BackendConfig.
+- Updated `terraform/features/veo-demo/main.tf` to include `google_iap_web_iam_member` for access control.
+- Updated `docs/BACKLOG.md` marking T-0038 and F-0010 as Complete.
+
 ### Next Steps
-- Monitor T-0038 (IAP/Ingress) completion and perform final verification.
+- Standby for final project review by the PM and PO.

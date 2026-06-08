@@ -20,7 +20,7 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: "100m"
+            cpu: "50m"
             memory: "128Mi"
           limits:
             cpu: "200m"
@@ -31,6 +31,8 @@ kind: Service
 metadata:
   name: veo-frontend
   namespace: veo-demo
+  annotations:
+    cloud.google.com/backend-config: '{"default": "veo-demo-backend-config"}'
 spec:
   selector:
     app: veo-frontend

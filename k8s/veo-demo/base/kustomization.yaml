@@ -8,3 +8,4 @@ resources:
   - workflow-api.yaml
   - veo-frontend.yaml
   - ingress.yaml
+  - backend-config.yaml
