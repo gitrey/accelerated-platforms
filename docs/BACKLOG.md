@@ -13,6 +13,7 @@
 | F-0009 | P1 | Complete | Veo Gen Media Demo App | LOCAL | [F-0009](specs/F-0009-veo-gen-media-demo-app.md) |
 | F-0010 | P1 | Complete | Veo Demo App GKE Deployment Automation | LOCAL | [F-0010](specs/F-0010-veo-demo-app-gke-deployment-automation.md) |
 | F-0011 | P2 | Complete | Veo Demo UI Enhancements for Backend Visibility | LOCAL | [F-0011](specs/F-0011-veo-demo-ui-enhancements.md) |
+| F-0012 | P1 | Approved | Veo 3.1 Latest Features Demo (Reference-to-Video) | LOCAL | [F-0012](specs/F-0012-veo-3-1-latest-features-demo.md) |
 
 
 ## Technical Tasks
@@ -63,3 +64,8 @@
 | T-0042 | F-0011 | Implement Visual Progress Stepper for generation pipeline | SWE-1 | Completed |
 | T-0043 | F-0011 | Add API Documentation and Environment links to UI | SWE-1 | Completed |
 | T-0044 | F-0011 | Verify UI enhancements against backend events | SWE-Test | Completed |
+| T-0045 | F-0012 | Implement /api/v1/veo/veo3/reference-to-video endpoint in workflow-api | SWE-2 | To Do |
+| T-0046 | F-0012 | Update React UI to support multi-image upload for reference | SWE-1 | To Do |
+| T-0047 | F-0012 | Implement Reference-to-Video mode in the frontend | SWE-1 | To Do |
+| T-0048 | F-0012 | Update visual progress stepper for Reference-to-Video pipeline | SWE-1 | To Do |
+| T-0049 | F-0012 | Perform end-to-end verification of Reference-to-Video features | SWE-Test | To Do |
