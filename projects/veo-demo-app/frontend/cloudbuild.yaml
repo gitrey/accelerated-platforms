@@ -1,0 +1,65 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+steps:
+  - id: "Build veo-frontend image"
+    name: "gcr.io/kaniko-project/executor:latest"
+    args:
+      - --cache=true
+      - --cache-ttl=48h
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/veo-frontend:latest
+      - --log-format=text
+      - --log-timestamp=false
+      - --verbosity=info
+    waitFor: ["-"]
+
+  - id: "Deploy to GKE"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_CLUSTER_LOCATION} --project ${PROJECT_ID}
+        
+        cd k8s/veo-demo/overlays/dev
+        # Update project ID and Images in patch
+        sed -i "s/PROJECT_ID/${PROJECT_ID}/g" patch-project.yaml
+        sed -i "s|workflow-api:latest|${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/workflow-api:latest|g" patch-project.yaml
+        sed -i "s|veo-frontend:latest|${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/veo-frontend:latest|g" patch-project.yaml
+        
+        # Apply using kustomize
+        kubectl apply -k .
+
+    waitFor: ["Build veo-frontend image"]
+
+  - id: "Smoke Test"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        # Wait for Ingress IP
+        echo "Waiting for Ingress IP..."
+        INGRESS_IP=""
+        for i in {1..30}; do
+          INGRESS_IP=$(kubectl get ingress -n veo-demo veo-demo-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          if [ -n "$INGRESS_IP" ]; then
+            break
+          fi
+          sleep 10
+        done
+        
+        if [ -z "$INGRESS_IP" ]; then
+          echo "Ingress IP not found after timeout. Skipping smoke tests."
+          exit 0
+        fi
+        
+        chmod +x projects/veo-demo-app/smoke-test.sh
+        ./projects/veo-demo-app/smoke-test.sh "http://$INGRESS_IP" "http://$INGRESS_IP/api"
+    waitFor: ["Deploy to GKE"]
+
+
+substitutions:
+  _REGION: us-central1
+  _AR_REPO: veo-demo
+  _CLUSTER_NAME: main-cluster
+  _CLUSTER_LOCATION: us-central1
